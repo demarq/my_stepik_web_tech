@@ -1,0 +1,18 @@
+upstream wsgi {
+
+server 0.0.0.0:8080;
+server 0.0.0.0/hello/;
+
+}
+
+server {
+	
+	proxy_set_header Host $host;
+	proxt_set_hheader X-Real-IP $remote_addr;
+
+	location /hello/{
+		proxy_pass http://wsgi
+		
+	} 
+
+}
