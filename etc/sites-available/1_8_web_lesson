@@ -3,7 +3,7 @@ server {
         server_name _;
 
 
-        location ^ ~ /uploads/ {
+        location ^~ /uploads/ {
                 root /home/box/web/;
         }
 
