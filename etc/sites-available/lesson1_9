@@ -1,17 +1,18 @@
-upstream wsgi {
+upstream gunicorn {
 
 server 0.0.0.0:8080;
-server 0.0.0.0/hello/;
 
 }
 
 server {
-	
+	server_name 192.168.0.103;
+	listen 80;	
 	proxy_set_header Host $host;
-	proxt_set_hheader X-Real-IP $remote_addr;
+	proxy_set_header X-Real-IP $remote_addr;
 
-	location /hello/{
-		proxy_pass http://wsgi
+	location ~ hello/
+	{
+		proxy_pass http://gunicorn;
 		
 	} 
 
