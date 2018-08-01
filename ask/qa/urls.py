@@ -1,12 +1,12 @@
-from django.urls import path, include
+from django.conf.urls import url
 from qa.views import test
 
 urlpatterns = [
-    path(r'^/', test, name='home'),
-    path(r'^login/', test, name='login'),
-    path(r'^question/?P<id>(\d*)', test, name='question'),
-    path(r'^ask/', test, name='ask'),
-    path(r'^popular/', test, name='popular'),
-    path(r'^new/', test, name='new'),
+    url(r'', test, name='home'),
+    url(r'login/', test, name='login'),
+    url(r'question/(?P<id>[\d]{0,10})&', test, name='question'),
+    url(r'ask/', test, name='ask'),
+    url(r'popular/', test, name='popular'),
+    url(r'new/', test, name='new'),
 ]
 
