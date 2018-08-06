@@ -1,0 +1,18 @@
+{% extends 'qa/base.html' %}
+
+{% block content %}
+
+<ul class="paginator">
+    {% for p in paginator.page_rage %}
+
+{% if p.number == page.number %}
+    <li class="active">
+    {% else %}
+    <li>
+    {% endif %}
+
+    <a href="{{paginator.baseurl}}{{p.number}}">{{p.number}}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

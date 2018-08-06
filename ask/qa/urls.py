@@ -1,8 +1,8 @@
 from django.conf.urls import url
-from qa.views import test
+from .views import *
 
 urlpatterns = [
-    url(r'^$', test, name='home'),
+    url(r'^$', home, name='home'),
     url(r'login/', test, name='login'),
     url(r'question/(?P<id>[\d]{0,10})$', test, name='question'),
     url(r'ask/', test, name='ask'),
