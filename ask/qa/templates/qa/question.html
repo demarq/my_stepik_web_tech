@@ -1,0 +1,20 @@
+{% extends 'qa/base.html' %}
+
+{% block content %}
+<div class="col-md-8 col-xs-2">
+    <h1 class="h1">{{ question.title }}</h1>
+    <h6> {{question.text}} </h6>
+
+</div>
+<div class="col-md-8">
+    <table class="table">
+    {% for a in answers %}
+    <tr class="table-bordered">
+        <td>{{ a.text }}</td>
+        <td>{{ a.added_at }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

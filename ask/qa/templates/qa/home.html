@@ -1,22 +1,32 @@
 {% extends 'qa/base.html' %}
 
 {% block content %}
+<div class="col-md-8 col-xs-2">
+    <table class="table">
+        {% for p in page.object_list %}
+        <tr class="table-responsive">
+            <td><a href="/question/{{p.id}}">{{ p }}</a></td>
+            <td>{{ p.added_at }}</td>
+            <td>{{ p.rating }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
-    {% for p in paginator.page_range %}
 
-    {% endfor %}
+<div class="col-md-offset-2 col-md-6 col-xs-12">
+    <ul class="pagination">
 
-<ul class="pagination">
+        {% for p in paginator.page_range %}
+            {% if p == page.number %}
+            <li class="active">
+            {% else %}
+            <li>
+            {% endif %}
+            <a href="{{paginator.baseurl}}{{ p }}">{{ p }}</a>
+            </li>
 
-    {% for p in paginator.page_range %}
-        {% if p.number == page.number %}
-        <li class="active">
-        {% else %}
-        <li>
-        {% endif %}
-        <a href="{{paginator.baseurl}}{{ p }}">{{ p }}</a>
-        </li>
-
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
