@@ -1,20 +1,33 @@
 {% extends 'qa/base.html' %}
 
 {% block content %}
-<div class="col-md-8 col-xs-2">
-    <h1 class="h1">{{ question.title }}</h1>
-    <h6> {{question.text}} </h6>
 
+<div class="col-md-8 col-xs-8">
+<div class="panel panel-default">
+  <div class="panel-heading">{{ question.title }}</div>
+  <div class="panel-body">{{question.text}} </div>
 </div>
-<div class="col-md-8">
-    <table class="table">
-    {% for a in answers %}
-    <tr class="table-bordered">
-        <td>{{ a.text }}</td>
-        <td>{{ a.added_at }}</td>
-    </tr>
-    {% endfor %}
-    </table>
 </div>
+
+<div class="col-md-6 col-xs-8">
+<div class="panel panel-default">
+    <div class="panel-heading">Answers</div>
+    <div class="panel-body">
+        <table class="table table-responsive">
+            {% for a in answers %}
+                <tr class="table-bordered">
+                    <td>{{ a.text }}</td>
+                    <td>{{ a.added_at }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+<form class="form" method="post" action="{{ request.path }}">
+    {% include 'qa/field_form.html' %}
+    <input type="hidden" name="question" value="{{ question.id }}">
+</form>
 
 {% endblock %}

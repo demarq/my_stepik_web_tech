@@ -1,22 +1,30 @@
 {% load static %}
+{% load bootstrap3 %}
+
 
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
     <div>
         <div class="col-md-4 col-xs-3">
-            <a href="/"><button class="button-alert">New</button></a>
+            <a href="{% url 'home' %}" class="container">{% bootstrap_button "New" button_type="submit" button_class="btn-primary" size='sm'%}</a>
             <br>
-            <a href="/popular/"><button class="button button-success">Popular</button></a>
+            <a href="{% url 'popular' %}" class="container">{% bootstrap_button "popular" button_type="submit" button_class="btn-primary" size='sm'%}</a>
+            <br>
+            <a href="{% url 'ask' %}" class="container">{% bootstrap_button "ask" button_type="submit" button_class="btn-alert" size='sm'%}</a>
         </div>
-        <div class="col-md-8">
-        {% block content %}
-        {% endblock %}
+
+        <div class="container">
+            <div class=" col-md-6 col-xs-6">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
     </div>
 </body>

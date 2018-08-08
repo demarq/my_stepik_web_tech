@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 from django.db.models import ObjectDoesNotExist
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from .models import *
+from .forms import *
 
 
 def home(request):
@@ -26,13 +27,43 @@ def home(request):
 
 def question(request, id):
     questions = get_object_or_404(Question, id=id)
-    try:
-        answers = Answer.objects.filter(question_id=id)
-    except ObjectDoesNotExist:
-        answers = []
-    return render(request, 'qa/question.html', {'question': questions,
-                                                'answers': answers,
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        form.question = questions.id
+        if form.is_valid():
+            a = form.save()
+            return HttpResponseRedirect(questions.get_url())
+    else:
+        form = AnswerForm()
+        questions = get_object_or_404(Question, id=id)
+        try:
+            answers = Answer.objects.filter(question_id=id)
+        except ObjectDoesNotExist:
+            answers = []
+        return render(request, 'qa/question.html', {'question': questions,
+                                                    'answers': answers,
+                                                    'form': form
                                                 })
+
+
+def ask(request):
+    author = 1
+    if request.method == 'POST':
+        form = AskForm(request.POST)
+        if form.is_valid():
+            ask = form.save()
+            return HttpResponseRedirect(ask.get_url())
+        else:
+            print(form.errors)
+            return render(request, 'qa/ask.html', {'form': form,
+                                                   'author_id': author,
+                                                   })
+
+    else:
+        form = AskForm()
+        return render(request, 'qa/ask.html', {'form': form,
+                                               'author_id': author,
+                                               })
 
 
 def test(request, *args, **kwargs):
