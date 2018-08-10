@@ -1,5 +1,5 @@
 {% load bootstrap3 %}
 {% csrf_token %}
-{% bootstrap_form form error_types='field_errors'%}
-{% buttons submit='apply' reset='reset'%}{% endbuttons %}
+{% bootstrap_form form %}
+{% bootstrap_button 'apply'  button_type='submit' button_class='btn_success'%}
 

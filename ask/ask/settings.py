@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+DEFAULT_CHARSET = 'utf-8'
 
 # Application definition
 
@@ -79,10 +80,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django',
-	'USER': 'django',
-	'PASSWORD': 'qwerted',
-    }
-}
+        'USER': 'django',
+        'PASSWORD': 'qwerted',
+        'OPTIONS': {'charset': 'utf8mb4'},
+        }
+            }
 
 
 # Password validation

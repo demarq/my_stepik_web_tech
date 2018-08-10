@@ -2,22 +2,23 @@
 
 {% block content %}
 
-<div class="col-md-8 col-xs-8">
+<div class="col-md-12 col-xs-12 col-sm-12">
 <div class="panel panel-default">
   <div class="panel-heading">{{ question.title }}</div>
   <div class="panel-body">{{question.text}} </div>
 </div>
 </div>
 
-<div class="col-md-6 col-xs-8">
+<div class="col-md-12 col-xs-12 col-sm-12">
 <div class="panel panel-default">
     <div class="panel-heading">Answers</div>
     <div class="panel-body">
-        <table class="table table-responsive">
+        <table class="table table-bordered">
             {% for a in answers %}
-                <tr class="table-bordered">
+                <tr class="nav">
                     <td>{{ a.text }}</td>
                     <td>{{ a.added_at }}</td>
+                    <td>{{ a.author }}</td>
                 </tr>
             {% endfor %}
         </table>
@@ -28,6 +29,7 @@
 <form class="form" method="post" action="{{ request.path }}">
     {% include 'qa/field_form.html' %}
     <input type="hidden" name="question" value="{{ question.id }}">
+    <input type="hidden" name="author" value="{{ request.user.id }}">
 </form>
 
 {% endblock %}

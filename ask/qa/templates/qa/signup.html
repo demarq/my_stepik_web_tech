@@ -1,0 +1,16 @@
+{% extends 'qa/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="col-md-12 col-xs-12 col-sm-12">
+<div class="panel panel-default">
+    <div class="panel-info">Signup</div>
+    <div class="panel-body">
+    <form class="form" method="post" action="{{ request.path }}">
+        {% include 'qa/field_form.html' %}
+    </form>
+
+    </div>
+</div>
+
+{% endblock %}

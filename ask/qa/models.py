@@ -21,6 +21,9 @@ class Question(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     likes = models.ManyToManyField(User, related_name='likes_set')
 
+    def __unicode__(self):
+        return self.title
+
     def __str__(self):
         return self.title
 

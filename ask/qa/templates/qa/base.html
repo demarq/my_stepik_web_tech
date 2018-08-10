@@ -11,15 +11,18 @@
     <title>Title</title>
 </head>
 <body>
-    <div>
-        <div class="col-md-4 col-xs-3">
-            <a href="{% url 'home' %}" class="container">{% bootstrap_button "New" button_type="submit" button_class="btn-primary" size='sm'%}</a>
-            <br>
-            <a href="{% url 'popular' %}" class="container">{% bootstrap_button "popular" button_type="submit" button_class="btn-primary" size='sm'%}</a>
-            <br>
-            <a href="{% url 'ask' %}" class="container">{% bootstrap_button "ask" button_type="submit" button_class="btn-alert" size='sm'%}</a>
-        </div>
+<div class="col-md-12 page-header" style="background-color: #a6e1ec; height: 7%" >
+    <div class="col-md-offset-9 col-md-3" >
+        {% ifequal '' request.user.username %} <a href="{% url 'login' %}">login</a> <a href="{% url 'signup' %}">signup</a> {% else %} <a href="/home/user/{{request.user}}">{% bootstrap_label request.user %}</a> <a href="{% url 'logout' %}">logout</a> {% endifequal %}
 
+    </div>
+</div>
+    <div>
+        {% block sidebar %}
+        <div class="col-md-3 col-xs-3" >
+            {% include 'qa/sidebar.html' %}
+        </div>
+        {% endblock %}
         <div class="container">
             <div class=" col-md-6 col-xs-6">
                 {% block content %}
@@ -27,5 +30,7 @@
             </div>
         </div>
     </div>
+{% block footer %}
+{% endblock %}
 </body>
 </html>
