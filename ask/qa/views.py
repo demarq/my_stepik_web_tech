@@ -94,8 +94,10 @@ def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         next_ref = request.POST.get('next_ref', '/')
-        print(request.POST.get('login'), request.POST.get('password'))
-        user = authenticate(username=request.POST.get('login'), password=request.POST.get('password'))
+        print(request.POST.get('username'), request.POST.get('password'))
+        user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+
+        print(user)
         if form.is_valid():
             if user:
                 dologin(request, user=user)

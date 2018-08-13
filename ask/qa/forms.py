@@ -5,22 +5,22 @@ from .custom_utils import startsWithWrongSymbol, containWrongSymbols
 
 
 class LoginForm(forms.Form):
-    login = forms.CharField(max_length=20)
+    username = forms.CharField(max_length=20)
     password = forms.CharField(max_length=100, widget=forms.PasswordInput)
 
-    def clean_login(self):
-        login = self.cleaned_data['login']
-        if not startsWithWrongSymbol(login):
-            raise forms.ValidationError('Login must starts with latin symbol.', code='WrongFirstSymbol')
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if not startsWithWrongSymbol(username):
+            raise forms.ValidationError('Username must starts with latin symbol.', code='WrongFirstSymbol')
         else:
-            return login
+            return username
 
     def clean_password(self):
         password = self.cleaned_data['password']
         return password
 
     def bad_login(self):
-        self.add_error('login', 'Invalid login or password.')
+        self.add_error('username', 'Invalid login or password.')
         self.add_error('password', 'Invalid login or password.')
 
 
@@ -74,7 +74,7 @@ class SignUpForm(forms.Form):
         return email
 
     def save(self):
-        q = User.objects.create(**self.cleaned_data)
+        q = User.objects.create_user(**self.cleaned_data)
         return q
 
 

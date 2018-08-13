@@ -38,5 +38,5 @@ class Answer(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.title
+        return self.text
 
