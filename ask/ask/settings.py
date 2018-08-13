@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'django',
         'USER': 'django',
         'PASSWORD': 'qwerted',
-        'OPTIONS': {'charset': 'utf8mb4'},
+#        'OPTIONS': {'charset': 'utf8mb4'},
         }
             }
 
