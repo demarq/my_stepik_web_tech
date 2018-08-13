@@ -27,7 +27,7 @@ class LoginForm(forms.Form):
 class AskForm(forms.Form):
     title = forms.CharField(max_length=100)
     text = forms.CharField(widget=forms.Textarea)
-    author = forms.HiddenInput()
+    author = forms.IntegerField(widget=forms.HiddenInput)
 
     def clean_title(self):
         title = self.cleaned_data['title']
@@ -38,9 +38,9 @@ class AskForm(forms.Form):
         return text
 
     def clean_author(self):
-        author = self.cleaned_data['login']
-        print(author)
-        return author
+        author = self.cleaned_data['author']
+        user = User.objects.get(id=author)
+        return user
 
     def save(self):
         q = Question.objects.create(**self.cleaned_data)

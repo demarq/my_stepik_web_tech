@@ -52,16 +52,22 @@ def question(request, id):
 
 
 def ask(request):
-    request.encoding = 'utf-8'
     if request.method == 'POST':
+        request.POST = request.POST.copy()
+        request.POST.update({'author': request.user.id}, mutable=True)
         form = AskForm(request.POST)
         if form.is_valid():
-            form.author = request.user
             ask = form.save()
             return HttpResponseRedirect(ask.get_url())
+        else:
+            return render(request, 'qa/ask.html', {'form': form,
+                                                   'author': request.user.id
+                                                   })
     else:
         form = AskForm()
-        return render(request, 'qa/ask.html', {'form': form
+        form.author = request.user.id
+        return render(request, 'qa/ask.html', {'form': form,
+                                               'author': request.user.id
                                                })
 
 

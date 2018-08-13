@@ -3,10 +3,15 @@
 {% block content %}
 
 <div class="col-md-12 col-xs-12 col-sm-12">
-<div class="panel panel-default">
-  <div class="panel-heading">{{ question.title }}</div>
-  <div class="panel-body">{{question.text}} </div>
-</div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          {{ question.title }}        {{ question.author }}
+      </div>
+      <div class="panel-body">{{question.text}} </div>
+    </div>
+    <div>
+
+    </div>
 </div>
 
 <div class="col-md-12 col-xs-12 col-sm-12">
